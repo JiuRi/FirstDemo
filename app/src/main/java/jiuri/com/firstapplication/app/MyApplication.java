@@ -1,8 +1,6 @@
 package jiuri.com.firstapplication.app;
 
-import android.app.Activity;
 import android.app.Application;
-import android.os.Bundle;
 
 /**
  * Created by user103 on 2017/7/14.
@@ -13,7 +11,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         //这个回调可用于检测应用内所有activity的生命周期!
-        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+      /*  registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
 
@@ -48,6 +46,6 @@ public class MyApplication extends Application {
             public void onActivityDestroyed(Activity activity) {
 
             }
-        });
+        });*/
     }
 }

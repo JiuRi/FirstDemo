@@ -1,19 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawlayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="jiuri.com.firstapplication.ui.activity.MainActivity">
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
+            android:id="@+id/appbar"
+            layout="@layout/toolbar"/>
+        <FrameLayout
+            android:id="@+id/frame_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/appbar"
+            android:scrollbars="none"
+            android:elevation="5dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </android.support.design.widget.CoordinatorLayout>
+<!--<android.support.design.widget.NavigationView
+    android:fitsSystemWindows="true"
+    android:id="@+id/navigation_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    app:menu="@menu/navation_menu"
+    >
+</android.support.design.widget.NavigationView>-->
+    <LinearLayout
+        android:id="@+id/drawcontain"
+        android:background="@android:color/white"
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        android:layout_width="300dp"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/drawbarbar"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <LinearLayout
+                android:layout_centerInParent="true"
+                android:id="@+id/drawbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/drawpic"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/draw_logo"/>
+                <TextView
+                    android:id="@+id/drawbartitle"
+                    android:layout_gravity="bottom"
+                    android:textStyle="bold"
+                    android:textColor="@color/titlecolor"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/drawpic"
+                    android:text="明报新闻"/>
+            </LinearLayout>
+         <ImageView
+             android:layout_marginRight="5dp"
+             android:id="@+id/x"
+             android:scaleType="centerCrop"
+             android:layout_centerVertical="true"
+             android:layout_alignParentRight="true"
+             android:src="@mipmap/x"
+             android:layout_width="15dp"
+             android:layout_height="15dp"/>
+        </RelativeLayout>
+     <RelativeLayout
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+        <GridView
+            android:id="@+id/graid1"
+            android:numColumns="4"
+             android:verticalSpacing="30dp"
+            android:horizontalSpacing="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        </GridView>
+        <GridView
+            android:id="@+id/graid2"
+            android:numColumns="3"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </GridView>
+     </RelativeLayout>
 
-</android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+</android.support.v4.widget.DrawerLayout>

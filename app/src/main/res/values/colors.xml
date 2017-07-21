@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#FF0202</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="titlecolor">#ffffff</color>
+    <color name="main">#853D0E</color>
+    <color name="pns">#BF9102</color>
+    <color name="ins">#FF0202</color>
+    <color name="tabcolor">#a4a2a2</color>
+    <color name="yulebg">#7131a1</color>
+    <color name="time">#445b8a</color>
+    <color name="ear">#203b73</color>
+
+
 </resources>
