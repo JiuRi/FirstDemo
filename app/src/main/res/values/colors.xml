@@ -11,6 +11,7 @@
     <color name="yulebg">#7131a1</color>
     <color name="time">#445b8a</color>
     <color name="ear">#203b73</color>
+    <color name="recyclebg">#ddd</color>
 
 
 </resources>

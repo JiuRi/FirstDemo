@@ -16,6 +16,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.pixelad.AdControl;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import jiuri.com.firstapplication.R;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private View mDrawbarbar;
     private View mDrawcontain;
     private SettingFragment mSettingFragment;
+    private AdControl adControl;
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
@@ -48,7 +50,44 @@ public class MainActivity extends AppCompatActivity {
         //添加一句话
         //aaaaaaa
         initView();
+        initAD();
     }
+
+    private void initAD() {
+        adControl = (AdControl) this.findViewById(R.id.crazy_banner);
+/*        adControl.setOnPMAdListener(new AdControl.OnPMAdListener() {
+
+            @Override
+            public void onFeedCompleted() {
+                // TODO Auto-generated method stub
+
+                adControl.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onFailedToLoad(Exception exception) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onBrowserClosed() {
+                // TODO Auto-generated method stub
+
+                adControl.destroyDrawingCache();
+
+            }
+
+            @Override
+            public void onAdLoadCompleted() {
+                // TODO Auto-generated method stub
+            }
+        });*/
+        adControl.setSID("6030896314445");
+
+    }
+
+
     public void initView() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawbarbar = (View) findViewById(R.id.drawbarbar);
@@ -84,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (position){
                     case 0:
                         changeState(View.GONE,"",R.color.main);
+
                         break;
                     case 1:
                         changeState(View.VISIBLE,"每日明報",R.color.pns);
@@ -97,6 +137,13 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         overridePendingTransition(R.anim.mainactivity_enter,R.anim.mainactivity_out);
                         break;
+                    case 5:
+                        mDrawerLayout.closeDrawers();
+                        Intent intent2 =new Intent(MainActivity.this,AdActivity.class);
+                        startActivity(intent2);
+                        overridePendingTransition(R.anim.mainactivity_enter,R.anim.mainactivity_out);
+                        break;
+
                     case 7:
                         mDrawerLayout.closeDrawers();
                         Intent intent1 =new Intent(MainActivity.this,SetingActivity.class);
