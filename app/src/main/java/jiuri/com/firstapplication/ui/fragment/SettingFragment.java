@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,14 +27,16 @@ import jiuri.com.firstapplication.R;
  */
 
 public class SettingFragment extends Fragment {
-    private String [] pns={"熱門","要聞","港聞","教育","社評","觀點","中國","國際","經濟","體育","經濟","副刊","娛樂","英文","深度報道"};
-    private String [] ins={"熱門","港聞","經濟","地產","兩岸","國際","體育","娛樂","文摘"};
-    private String [] mArr;
+    private String[] pns = {"熱門", "要聞", "港聞", "教育", "社評", "觀點", "中國", "國際", "經濟", "體育", "經濟", "副刊", "娛樂", "英文", "深度報道"};
+    private String[] ins = {"熱門", "港聞", "經濟", "地產", "兩岸", "國際", "體育", "娛樂", "文摘"};
+    private String[] mArr;
     private RecyclerView list;
     private View mSettingFragment;
     private TabLayout mTablayout;
     private ViewPager mViewPager;
     private LinearLayout mMLinearLayou;
+    private MyPagerAdapter mMyPagerAdapter;
+    private int mColor;
 
     @Nullable
     @Override
@@ -46,23 +48,27 @@ public class SettingFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       // int to = (int) getArguments().get("to");
+        int to = (int) getArguments().get("to");
         mViewPager = (ViewPager) mSettingFragment.findViewById(R.id.viewpager);
         mMLinearLayou = (LinearLayout) mSettingFragment.findViewById(R.id.contant_bar);
         mTablayout = (TabLayout) mSettingFragment.findViewById(R.id.tab_layout);
-        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getChildFragmentManager());
-      mArr=pns;
+        mMyPagerAdapter = new MyPagerAdapter(getChildFragmentManager());
+        mArr = pns;
         for (int i = 0; i < mArr.length; i++) {
-            myPagerAdapter.addFragment(new OtherFragment(),mArr[i]);
+            mMyPagerAdapter.addFragment(OtherFragment.getInstance("mian", 1), mArr[i]);
             mTablayout.addTab(mTablayout.newTab().setText("1"));
         }
-        mViewPager.setAdapter(myPagerAdapter);
+        mViewPager.setAdapter(mMyPagerAdapter);
         mTablayout.setupWithViewPager(mViewPager);
-        setTablayoutColor(R.color.main);
+
+        setTablayoutColor(to);
+
     }
-    public static class MyPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragments = new ArrayList<>();
-        private final List<String> mFragmentTitles = new ArrayList<>();
+
+    public static class MyPagerAdapter extends FragmentStatePagerAdapter {
+        private List<Fragment> mFragments = new ArrayList<>();
+        private List<String> mFragmentTitles = new ArrayList<>();
+
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -70,6 +76,10 @@ public class SettingFragment extends Fragment {
         public void addFragment(Fragment fragment, String title) {
             mFragments.add(fragment);
             mFragmentTitles.add(title);
+        }
+
+        private List<Fragment> getFragments() {
+            return mFragments;
         }
 
         @Override
@@ -87,13 +97,13 @@ public class SettingFragment extends Fragment {
             return mFragmentTitles.get(position);
         }
     }
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public void setTablayoutColor(int color){
-        mMLinearLayou.setBackground(getResources().getDrawable(color));
-    }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public void setTablayoutColor(int color) {
+            mMLinearLayou.setBackground(getResources().getDrawable(color));
+    }
     @Override
-    public void onAttach(Context context) {
+    public void onAttach (Context context){
         super.onAttach(context);
     }
 }

@@ -6,8 +6,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context="jiuri.com.firstapplication.ui.activity.MainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -25,86 +27,156 @@
         <com.pixelad.AdControl
             android:id="@+id/crazy_banner"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></com.pixelad.AdControl>
+            android:layout_height="match_parent"/>
     </android.support.design.widget.CoordinatorLayout>
-<!--<android.support.design.widget.NavigationView
-    android:fitsSystemWindows="true"
-    android:id="@+id/navigation_view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="start"
-    app:menu="@menu/navation_menu"
-    >
-</android.support.design.widget.NavigationView>-->
+        <View
+            android:layout_alignParentTop="true"
+            android:id="@+id/statubar"
+            android:background="@color/main"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"/>
+    </RelativeLayout>
     <LinearLayout
-        android:id="@+id/drawcontain"
         android:background="@android:color/white"
+        android:fitsSystemWindows="true"
+        android:id="@+id/drawcontain"
         android:layout_gravity="start"
         android:orientation="vertical"
         android:layout_width="300dp"
         android:layout_height="match_parent">
-        <RelativeLayout
-            android:id="@+id/drawbarbar"
-            android:background="@color/colorPrimary"
-            android:layout_width="match_parent"
-            android:layout_height="40dp">
-            <LinearLayout
-                android:layout_centerInParent="true"
-                android:id="@+id/drawbar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/drawpic"
-                    android:layout_centerInParent="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/draw_logo"/>
-                <TextView
-                    android:id="@+id/drawbartitle"
-                    android:layout_gravity="bottom"
-                    android:textStyle="bold"
-                    android:textColor="@color/titlecolor"
-                    android:textSize="16sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/drawpic"
-                    android:text="明报新闻"/>
-            </LinearLayout>
-         <ImageView
-             android:layout_marginRight="5dp"
-             android:id="@+id/x"
-             android:scaleType="centerCrop"
-             android:layout_centerVertical="true"
-             android:layout_alignParentRight="true"
-             android:src="@mipmap/x"
-             android:layout_width="15dp"
-             android:layout_height="15dp"/>
-        </RelativeLayout>
+    <RelativeLayout
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <LinearLayout
+            android:id="@+id/login"
+            android:onClick="tiaozhuan"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/user_avatar_view"
+                android:layout_width="74dp"
+                android:layout_height="74dp"
+                android:layout_gravity="start|top"
+                android:layout_marginEnd="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="20dp"
+                android:src="@mipmap/ico_user_default"
+                />
+            <TextView
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="钟九日"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </RelativeLayout>
      <RelativeLayout
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="12dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
          android:layout_width="match_parent"
          android:layout_height="match_parent">
+         <LinearLayout
+             android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+             <LinearLayout
+                 android:id="@+id/main"
+                 android:onClick="tiaozhuan"
+                 android:padding="5dp"
+                 android:layout_marginLeft="15dp"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content">
+                 <ImageView
+                     android:src="@mipmap/main"
+                     android:layout_width="30dp"
+                     android:layout_height="30dp"/>
+                 <TextView
+                     android:textSize="20sp"
+                     android:layout_marginLeft="25dp"
+                     android:layout_gravity="center_vertical"
+                     android:text="主頁"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"/>
+             </LinearLayout>
+             <LinearLayout
+                 android:id="@+id/pns"
+                 android:onClick="tiaozhuan"
+                 android:layout_marginTop="12dp"
+                 android:padding="5dp"
+                 android:layout_marginLeft="15dp"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content">
+                 <ImageView
+                     android:src="@mipmap/pns"
+                     android:layout_width="30dp"
+                     android:layout_height="30dp"/>
+                 <TextView
+                     android:textSize="20sp"
+                     android:layout_marginLeft="25dp"
+                     android:layout_gravity="center_vertical"
+                     android:text="每日明報"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"/>
+             </LinearLayout>
+             <LinearLayout
+                 android:id="@+id/ins"
+                 android:onClick="tiaozhuan"
+                 android:layout_marginTop="12dp"
+                 android:padding="5dp"
+                 android:layout_marginLeft="15dp"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content">
+                 <ImageView
+                     android:src="@mipmap/ins"
+                     android:layout_width="30dp"
+                     android:layout_height="30dp"/>
+                 <TextView
+                     android:textSize="20sp"
+                     android:layout_marginLeft="25dp"
+                     android:layout_gravity="center_vertical"
+                     android:text="即時新聞"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"/>
+             </LinearLayout>
+             <LinearLayout
+                 android:id="@+id/set"
+                 android:onClick="tiaozhuan"
+                 android:layout_marginTop="12dp"
+                 android:padding="5dp"
+                 android:layout_marginLeft="15dp"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content">
+                 <ImageView
+                     android:src="@mipmap/set"
+                     android:layout_width="30dp"
+                     android:layout_height="30dp"/>
+                 <TextView
+                     android:textSize="20sp"
+                     android:layout_marginLeft="25dp"
+                     android:layout_gravity="center_vertical"
+                     android:text="設置"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"/>
+             </LinearLayout>
+         </LinearLayout>
         <GridView
-            android:id="@+id/graid1"
-            android:numColumns="4"
-             android:verticalSpacing="30dp"
-            android:horizontalSpacing="10dp"
-            android:layout_alignParentTop="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </GridView>
-        <GridView
+            android:layout_marginLeft="10dp"
             android:id="@+id/graid2"
             android:numColumns="3"
+            android:verticalSpacing="10dp"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </GridView>
      </RelativeLayout>
-
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

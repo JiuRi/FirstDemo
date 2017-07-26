@@ -2,7 +2,7 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!--状态栏颜色-->
-        <item name="android:colorPrimaryDark">@color/colorPrimary</item>
+        <item name="android:colorPrimaryDark">@color/colorAccent</item>
     <!--Toolbar颜色-->
         <item name="colorPrimary">@color/colorPrimary</item>
         <!--返回键样式-->
