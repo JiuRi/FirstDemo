@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.set:
                 mDrawerLayout.closeDrawers();
-                Intent intent1 =new Intent(MainActivity.this,SetingActivity.class);
+                Intent intent1 =new Intent(MainActivity.this,AdActivity.class);
                 startActivity(intent1);
                 overridePendingTransition(R.anim.mainactivity_enter,R.anim.mainactivity_out);
                 break;

@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:layout_margin="2dp"
+                android:layout_marginRight="5dp"
+              android:layout_marginLeft="5dp"
+              android:layout_marginTop="5dp"
               android:fitsSystemWindows="true"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+    <TextView
+        android:layout_marginLeft="3dp"
+    android:layout_marginTop="8dp"
+    android:text="【一地兩檢】 請泛民主流派理性討論一地兩檢 (文 : 某文瑞)"
+    android:textColor="@android:color/black"
+    android:textSize="18sp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="5dp"
+        android:text="2017-7-27 9:03:54"
+        android:textColor="@android:color/black"
+        android:textSize="17sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <android.support.v4.view.ViewPager
+        android:layout_marginTop="5dp"
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="200dp">
@@ -22,8 +41,34 @@
     </LinearLayout>
 </HorizontalScrollView>
     <TextView
+        android:textSize="16sp"
+        android:layout_margin="5dp"
+        android:lineSpacingExtra="10dp"
         android:layout_marginTop="10dp"
-        android:text="@string/newsd"
+        android:text="「一地兩檢」安排的最終目的，就是為了通關便利，方便香港市民。「一地兩檢」現在面對的爭議和困難，既不是法律問題，更不是違反《基本法》和「一國兩制」原則的問題，而是政治問題。說到底，「一地兩檢」就是一個民生工程，包括泛民支持者在內的的廣大市民都是「一地兩檢」便利安排的受惠者。泛民激進派不計後果，全面對抗，並不奇怪。泛民主流派則應在作出自己認為必要的政治表態之後，理性務實參與討論，盡可能爭取「一地兩檢」在符合基本法的基礎上，充分體現「一國兩制」特色，如期順利實施，以造福港人。這才是真正對港人負責任的態度。
+                                                                                                            \r\n 其他文章：【一地兩檢】一地兩檢 合理合法（文：顧敏康）
+
+                                                                                                           \r\n「一地兩檢」歸根結柢是經濟民生
+
+                                                                                                           \r\n以高速、安全、便捷、準時著稱的高鐵運輸系統，是世界交通發展的一大趨勢。據估算，待香港段開通後，從深圳和廣州坐高鐵將分別僅需15分鐘和48分鐘便可到達香港；往北京、上海、杭州及廈門等內地10個城市同樣可以直達，毋須轉車。
+
+                                                                                                           \r\n不過，要發揮高鐵真正效益，從便利港人角度出發，落實高鐵「一地兩檢」方案是關鍵。「一地兩檢」是讓高鐵發揮最大效益的通關安排，即內地在西九高鐵站大樓設檢查站，進入檢查點後就等於進入內地，離港旅客可乘坐列車到所有高鐵站城市，不需在內地再辦理通關手續，而抵港的乘客可選擇在內地任何一個高鐵站登車，到港時才辦理入境手續。如不實施「一地兩檢」，旅客屆時只能在內地少數設有通關口岸的高鐵站登車，失去靈活性。而且，「兩地兩檢」要求旅客上車時需重複經過通關檢查程序，耗費時間和精力。
+
+                                                                                                           \r\n除一般民用效益外，落實「一地兩檢」省時、省力、省金錢，對香港工商金融界、旅遊業界、廣大中小企往來內地發掘商機，同樣大有裨益，最終就是有利港人發展經濟。
+
+                                                                                                           \r\n請泛民人士回答3個問題
+
+                                                                                                           \r\n泛民如果要全面否定「一地兩檢」，就有責任回答下面3個問題：
+
+                                                                                                          \r\n 第一個問題：為何國際上通行「一地兩檢」，而香港不能做？
+
+                                                                                                           \r\n「一地兩檢」並非新鮮事物，在不少國家及地區都有採用。穿梭英國、法國與比利時的歐洲之星高鐵，採用的是「並置邊境管制」，讓英法雙方執法人員在出入境檢查站既可進行通關手續，亦可依法拘留和逮捕違法者，並在英法隧道有同樣司法權。美國和加拿大亦有採用「一地兩檢」安排，溫哥華機場就設有美國關口，赴美乘客經過美國執法人員檢查，到達美國後就不用再過關。至於連接新加坡和馬來西亞的馬來亞城際鐵路，旅客在新加坡兀蘭火車站亦可進行「一地兩檢」，前往馬來西亞旅客先完成新加坡出境，隨即可辦理大馬入境檢查。
+
+                                                                                                           \r\n環顧各地，愈來愈多跨境運輸已經採取「一地兩檢」的通關模式，原因很簡單，就是「一地兩檢」可大大節省旅客的過關時間，令運輸更有效率。至於法律問題，國與國之間都可以通過條約解決，並沒有存在法律上的爭議。香港為何要自設障礙，拒「一地兩檢」於千里之外？
+
+                                                                                                           \r\n第二個問題：為何深圳能夠借地給香港實行「一地兩檢」，而香港不能做？
+
+                                                                                                          \r\n 香港與內地實施「一地兩檢」已有先例。全國人大常委會在2006年12月通過決定，授權特區政府在深圳境內的港方口岸區範圍內，實行全封閉式管理，實行香港法律，並由香港的執法人員管理。及後，特區政府向立法會提交《深圳灣口岸港方口岸區條例草案》，成功實行「一地兩檢」。對此，中央政府一直是大力支���，內地同胞也抱持支持態度�"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView

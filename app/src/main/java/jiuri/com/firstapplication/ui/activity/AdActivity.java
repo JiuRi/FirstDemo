@@ -1,13 +1,14 @@
 package jiuri.com.firstapplication.ui.activity;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 
-import com.pixelad.AdControl;
+import com.shuyu.gsyvideoplayer.GSYVideoManager;
+import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 
 import jiuri.com.firstapplication.R;
 
@@ -16,47 +17,35 @@ import jiuri.com.firstapplication.R;
  */
 
 public class AdActivity extends AppCompatActivity {
-    private AdControl adControl = null;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题
         super.onCreate(savedInstanceState);
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏
         setContentView(R.layout.activity_adactivity);
-        adControl = (AdControl) this.findViewById(R.id.crazy_banner);
-        adControl.setOnPMAdListener(new AdControl.OnPMAdListener() {
+        final StandardGSYVideoPlayer video = (StandardGSYVideoPlayer)findViewById(R.id.video);
+        video.setUp("http://baobab.wdjcdn.com/14564977406580.mp4", true , null, "恭喜!恭喜! 又以為宅男女神結婚了");
+        video.getTitleTextView().setVisibility(View.VISIBLE);
+//非全屏下不显示返回键
+        video.setUp("http://baobab.wdjcdn.com/14564977406580.mp4", true,this.getExternalCacheDir(), "carch");
+        video.getBackButton().setVisibility(View.VISIBLE);
+//打开非全屏下触摸效果
+        video.setIsTouchWiget(true);
+        video.startPlayLogic();
+    }
 
-            @Override
-            public void onFeedCompleted() {
-                // TODO Auto-generated method stub
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GSYVideoManager.onResume();
+    }
 
-                adControl.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onFailedToLoad(Exception exception) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void onBrowserClosed() {
-                // TODO Auto-generated method stub
-
-                adControl.destroyDrawingCache();
-
-            }
-
-            @Override
-            public void onAdLoadCompleted() {
-                // TODO Auto-generated method stub
-            }
-        });
-        adControl.setSID("6030896314445");
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        GSYVideoManager.onPause();
     }
 }

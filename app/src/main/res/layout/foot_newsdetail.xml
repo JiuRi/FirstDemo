@@ -9,6 +9,7 @@
         android:layout_height="wrap_content">
 
         <jiuri.com.firstapplication.weiget.CircleImageView
+            android:background="@color/colorAccent"
             android:layout_margin="3dp"
             android:id="@+id/icon"
             android:layout_width="50dp"
@@ -41,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <View
-        android:background="@color/recyclebg"
+        android:background="@color/recyclebg2"
         android:layout_marginTop="2dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"></View>

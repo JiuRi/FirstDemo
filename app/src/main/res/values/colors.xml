@@ -12,8 +12,10 @@
     <color name="time">#445b8a</color>
     <color name="ear">#203b73</color>
     <color name="recyclebg">#ddd</color>
+    <color name="recyclebg2">#9363b7</color>
     <color name="insgriditembg">#96483e36</color>
     <color name="newsabout">#5ea5d6</color>
+    <color name="btnbg">#999999</color>
     <color name="bg">#36a1ea</color>
 
 </resources>
