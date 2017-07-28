@@ -39,7 +39,7 @@ public class SharePopwindow extends PopupWindow {
         //設置相關的屬性
         this.setContentView(mPopView);// 设置View
         this.setWidth(LinearLayoutCompat.LayoutParams.MATCH_PARENT);// 设置弹出窗口的宽
-        this.setHeight(700);// 设置弹出窗口的高
+        this.setHeight(610);// 设置弹出窗口的高
         this.setFocusable(true);// 设置弹出窗口可
         this.setAnimationStyle(R.style.mypopwindow_anim_style);// 设置动画
         this.setBackgroundDrawable(new ColorDrawable(0x00000000));// 设置背景透明
@@ -56,7 +56,7 @@ public class SharePopwindow extends PopupWindow {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 4);
         mRectcle.setLayoutManager(gridLayoutManager);
         HashMap<String, Integer> stringIntegerHashMap = new HashMap<>();
-        stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.BOTTOM_DECORATION,80);//底部间距
+        stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.BOTTOM_DECORATION,30);//底部间距
         mRectcle.addItemDecoration(new RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
         mRectcle.setAdapter(new SharePopAdapter(R.layout.item_share,mList));
     }
