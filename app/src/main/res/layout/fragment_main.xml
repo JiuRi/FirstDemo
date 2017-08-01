@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+    <TextView
+        android:gravity="center"
+        android:background="@color/main"
+        android:textColor="@color/titlecolor"
+        android:textSize="@dimen/toolbar_titlesize"
+        android:text="主頁"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
     <android.support.v7.widget.RecyclerView
         android:background="@color/recyclebg"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="1dp"
         android:id="@+id/recycle_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

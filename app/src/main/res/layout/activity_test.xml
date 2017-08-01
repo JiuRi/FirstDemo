@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/re"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:gravity="center_vertical"
+        android:text="我是上面的  :"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/recycle_view"
+    android:background="@color/btnbg"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+</android.support.v7.widget.RecyclerView>
+    <TextView
+        android:gravity="center_vertical"
+        android:text="我是下面的  :"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_view1"
+        android:background="@color/btnbg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+</RelativeLayout>

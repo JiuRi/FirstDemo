@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.shuyu.gsyvideoplayer.GSYVideoManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,5 +123,11 @@ public class NewsDetailActivity extends AppCompatActivity {
             list.add(new MyNewsListBean(MyNewsListBean.TYPE_NEW1));
         }
         return list;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        GSYVideoManager.onPause();
     }
 }

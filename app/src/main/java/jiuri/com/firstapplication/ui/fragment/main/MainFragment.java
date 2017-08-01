@@ -1,4 +1,4 @@
-package jiuri.com.firstapplication.ui.fragment;
+package jiuri.com.firstapplication.ui.fragment.main;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -11,7 +11,7 @@ import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 
 import jiuri.com.firstapplication.R;
-import jiuri.com.firstapplication.ui.activity.AdActivity;
+import jiuri.com.firstapplication.ui.activity.VideoPlayActivity;
 
 import static jiuri.com.firstapplication.R.mipmap.v;
 
@@ -59,7 +59,7 @@ public class MyPagerAdapter extends PagerAdapter {
             video.getFullscreenButton().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                container.getContext().startActivity(new Intent(container.getContext(), AdActivity.class));
+                container.getContext().startActivity(new Intent(container.getContext(), VideoPlayActivity.class));
                 }
             });
             imageView.setOnClickListener(new View.OnClickListener() {

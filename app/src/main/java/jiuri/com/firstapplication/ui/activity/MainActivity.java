@@ -14,18 +14,54 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pixelad.AdControl;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import jiuri.com.firstapplication.R;
 import jiuri.com.firstapplication.adapter.DrawGrideAdapter;
-import jiuri.com.firstapplication.ui.fragment.MainFragment;
+import jiuri.com.firstapplication.bean.MyTextSizeMessage;
+import jiuri.com.firstapplication.ui.fragment.main.MainFragment;
 import jiuri.com.firstapplication.ui.fragment.SettingFragment;
 
 public class MainActivity extends AppCompatActivity {
-    private NavigationView mNavigationView;
+    @BindView(R.id.pic)
+    ImageView mPic;
+    @BindView(R.id.toolbartitle)
+    TextView mToolbartitle;
+    @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.frame_content)
+    FrameLayout mFrameContent;
+    @BindView(R.id.crazy_banner)
+    AdControl mCrazyBanner;
+
+    @BindView(R.id.user_avatar_view)
+    ImageView mUserAvatarView;
+    @BindView(R.id.user_name)
+    TextView mUserName;
+    @BindView(R.id.login)
+    LinearLayout mLogin;
+    @BindView(R.id.main)
+    LinearLayout mMain;
+    @BindView(R.id.pns)
+    LinearLayout mPns;
+    @BindView(R.id.ins)
+    LinearLayout mIns;
+    @BindView(R.id.set)
+    LinearLayout mSet;
+    @BindView(R.id.graid2)
+    GridView mGraid2;
+    @BindView(R.id.drawlayout)
+    DrawerLayout mDrawlayout;
+    private NavigationView mNavigationView;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mActionBarDrawerToggle;
     private GridView mGridView1;
@@ -47,68 +83,78 @@ public class MainActivity extends AppCompatActivity {
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
         initView();
-
     }
+
     public void initView() {
+
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawcontain = (View) findViewById(R.id.drawcontain);
         mToolbarTitle = (TextView) findViewById(R.id.toolbartitle);
         mStatubar = (View) findViewById(R.id.statubar);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            mStatubar.setVisibility(View.GONE);
+        }
         mGridView2 = (GridView) findViewById(R.id.graid2);
         mFrameLayout = (FrameLayout) findViewById(R.id.frame_content);
         setSupportActionBar(mToolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawlayout);
-        mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,mToolbar, R.string.open, R.string.close);
+        mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
         mActionBarDrawerToggle.syncState();
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
         mGridView2.setAdapter(new DrawGrideAdapter(2));
         tiaozhuan(findViewById(R.id.main));
     }
-    public void tiaozhuan(View view){
-        switch (view.getId()){
+
+    public void tiaozhuan(View view) {
+        switch (view.getId()) {
             case R.id.login:
                 mDrawerLayout.closeDrawers();
-                Intent intent =new Intent(MainActivity.this,LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.mainactivity_enter,R.anim.mainactivity_out);
+                overridePendingTransition(R.anim.mainactivity_enter, R.anim.mainactivity_out);
                 break;
             case R.id.main:
                 MainFragment mainFragment = new MainFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, mainFragment).commit();
-                changeState(View.GONE,"",R.color.main);
+                changeState(View.GONE, "", R.color.main);
                 break;
             case R.id.pns:
                 SettingFragment settingFragment = new SettingFragment();
-                Bundle bundle=new Bundle();
-                bundle.putInt("to",R.color.pns);
+                Bundle bundle = new Bundle();
+                bundle.putInt("to", R.color.pns);
                 settingFragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, settingFragment).commit();
-                changeState(View.VISIBLE,"每日明報",R.color.pns);
+                changeState(View.VISIBLE, "每日明報", R.color.pns);
                 break;
             case R.id.ins:
                 SettingFragment settingFragment1 = new SettingFragment();
-                Bundle bundle1=new Bundle();
-                bundle1.putInt("to",R.color.ins);
+                Bundle bundle1 = new Bundle();
+                bundle1.putInt("to", R.color.ins);
                 settingFragment1.setArguments(bundle1);
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, settingFragment1).commit();
-                changeState(View.VISIBLE,"即時新聞",R.color.ins);
+                changeState(View.VISIBLE, "即時新聞", R.color.ins);
                 break;
             case R.id.set:
                 mDrawerLayout.closeDrawers();
-                Intent intent1 =new Intent(MainActivity.this,SetingActivity.class);
+                Intent intent1 = new Intent(MainActivity.this, TestActivity.class);
                 startActivity(intent1);
-                overridePendingTransition(R.anim.mainactivity_enter,R.anim.mainactivity_out);
+                overridePendingTransition(R.anim.mainactivity_enter, R.anim.mainactivity_out);
                 break;
         }
     }
 
-    private void changeState(int visiable,String title,int color) {
+    private void changeState(int visiable, String title, int color) {
         mDrawerLayout.closeDrawers();
         mToolbarTitle.setVisibility(visiable);
         mToolbarTitle.setText(title);
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(color));
         mStatubar.setBackgroundColor(getResources().getColor(color));
     }
-
+    @Subscribe (threadMode = ThreadMode.MAIN)
+    public void getMessage(MyTextSizeMessage message){
+        recreate();
+    }
 }

@@ -1,18 +1,25 @@
 package jiuri.com.firstapplication.ui.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import jiuri.com.firstapplication.R;
@@ -27,13 +34,16 @@ import jiuri.com.firstapplication.weiget.FullyGridLayoutManager;
  * Created by user103 on 2017/7/20.
  */
 
-public class OtherFragment extends Fragment {
+public class OtherFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     public static final String TO_FROM="from";
     public static final String TO_POSITION="positon";
     private ArrayList<String> title =new ArrayList<>();
     private ArrayList<String> path =new ArrayList<>();
     private View mInflate;
     private RecyclerView mRecyclerView;
+    private SwipeRefreshLayout mReflash;
+    private MultipleItemQuickAdapter mMyRecycleViewAdapter;
+    private List<MyNewsListBean> mMultipleItemData;
 
     public  static OtherFragment getInstance(String frome,int position){
        Bundle bundle=new Bundle();
@@ -68,13 +78,90 @@ public class OtherFragment extends Fragment {
 
         View view1 = toIns();
         mRecyclerView = (RecyclerView)view.findViewById(R.id.recycle_view);
+        mReflash = (SwipeRefreshLayout) view.findViewById(R.id.reflash);
+        mReflash.setColorSchemeColors(Color.BLUE,Color.RED,Color.GREEN);
+        mReflash.setOnRefreshListener(this);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        MultipleItemQuickAdapter myRecycleViewAdapter = new MultipleItemQuickAdapter(getContext(),getMultipleItemData());
-        myRecycleViewAdapter.addHeaderView(view1);
-       mRecyclerView.setAdapter(myRecycleViewAdapter) ;
-    }
+        mMyRecycleViewAdapter = new MultipleItemQuickAdapter(getContext(),getMultipleItemData());
+        mMyRecycleViewAdapter.addHeaderView(view1);
+        mMyRecycleViewAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        mMyRecycleViewAdapter.setLoadMoreView(new CustomLoadMoreView());
+        mMyRecycleViewAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
 
+            }
+        },mRecyclerView);
+        mMultipleItemData = getMultipleItemData();
+        mRecyclerView.setAdapter(mMyRecycleViewAdapter) ;
+        helper.attachToRecyclerView(mRecyclerView);
+    }
+    //为RecycleView绑定触摸事件
+    ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
+        @Override
+        public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            //首先回调的方法 返回int表示是否监听该方向
+            RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+            if (layoutManager instanceof GridLayoutManager) {// GridLayoutManager
+                // flag如果值是0，相当于这个功能被关闭
+                int dragFlag = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+                int swipeFlag = 0;
+                // create make
+                return makeMovementFlags(dragFlag, swipeFlag);
+            } else if (layoutManager instanceof LinearLayoutManager) {// linearLayoutManager
+                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
+                int orientation = linearLayoutManager.getOrientation();
+
+                int dragFlag = 0;
+                int swipeFlag = 0;
+
+                // 为了方便理解，相当于分为横着的ListView和竖着的ListView
+                if (orientation == LinearLayoutManager.HORIZONTAL) {// 如果是横向的布局
+                    swipeFlag = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+                    dragFlag = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+                } else if (orientation == LinearLayoutManager.VERTICAL) {// 如果是竖向的布局，相当于ListView
+                    dragFlag = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+                    swipeFlag = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+                }
+                return makeMovementFlags(dragFlag, swipeFlag);
+            }
+            return 0;
+
+        }
+
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            //滑动事件
+            Collections.swap(mMultipleItemData,viewHolder.getAdapterPosition(),target.getAdapterPosition());
+            mMyRecycleViewAdapter.notifyItemMoved(viewHolder.getAdapterPosition(),target.getAdapterPosition());
+            return false;
+        }
+
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            //侧滑事件
+            Log.d("aaa", "onSwiped: ______________________"+viewHolder.getAdapterPosition());
+            if (viewHolder.getAdapterPosition()==0){
+                mMyRecycleViewAdapter.remove(viewHolder.getAdapterPosition());
+            }
+            mMyRecycleViewAdapter.notifyItemRemoved(viewHolder.getAdapterPosition()-1);
+       /*     mMultipleItemData.remove(viewHolder.getAdapterPosition()-1);
+            mMyRecycleViewAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());*/
+        }
+
+        @Override
+        public boolean isItemViewSwipeEnabled() {
+            return true;
+        }
+
+        @Override
+        public boolean isLongPressDragEnabled() {
+            //是否可拖拽
+            return true;
+        }
+    });
     private View toIns() {
         title.add("【短命8號波】助理台長指依路徑和安全判斷　聽眾不接受解釋　質疑星期日影響少才掛波");
         View insView = View.inflate(getContext(), R.layout.ins_headerview, null);
@@ -106,5 +193,10 @@ public class OtherFragment extends Fragment {
         }
 
         return list;
+    }
+
+    @Override
+    public void onRefresh() {
+
     }
 }

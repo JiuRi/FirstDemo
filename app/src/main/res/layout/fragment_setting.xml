@@ -30,7 +30,10 @@
         </RelativeLayout>
 
     </android.support.v7.widget.Toolbar>
-
+<RelativeLayout
+    android:background="@color/recyclebg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -55,7 +58,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:text="較小"
+                android:text="較大"
                 android:textSize="18sp"/>
         </RelativeLayout>
 
@@ -70,8 +73,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:max="100"
-            android:progress="20"
+            android:max="4"
+            android:progress="2"
             android:progressDrawable="@drawable/bg_bar"
             android:thumb="@drawable/thumb_bar"/>
 
@@ -167,4 +170,22 @@
             android:layout_marginTop="1dp"
             android:background="@color/recyclebg"/>
     </LinearLayout>
+    <android.support.v7.widget.CardView
+        android:id="@+id/view"
+        android:visibility="gone"
+        android:background="#8888"
+        app:cardCornerRadius="3dp"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <TextView
+        android:textColor="@android:color/black"
+        android:id="@+id/textsize"
+        android:textSize="16sp"
+        android:padding="25dp"
+        android:text="明报新闻"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
 </LinearLayout>

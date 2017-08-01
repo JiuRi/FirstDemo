@@ -28,6 +28,10 @@
         <activity android:name=".ui.activity.NewsDetailActivity"
            />
         <activity android:name=".ui.activity.SurfaceViewTestActivity"/>
+        <activity android:name=".ui.activity.VideoPlayActivity" android:screenOrientation="landscape"
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+        />
+        <activity android:name=".ui.activity.TestActivity"/>
     </application>
 
 </manifest>

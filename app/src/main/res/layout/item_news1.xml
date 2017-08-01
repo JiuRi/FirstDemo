@@ -31,6 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/text1"
                     android:maxLines="2"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
@@ -38,6 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:id="@+id/text2"
                     android:textSize="15sp"
                     android:maxLines="3"
                     android:text="【明報喜訊】恭喜!恭喜!27歲[宅男女神]陳嘉賓昨日宣佈將拍拖逾4年的初戀情人、35歲半億身家的金融闊少......"
