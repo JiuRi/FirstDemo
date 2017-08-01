@@ -22,6 +22,7 @@ public class Constants {
     public static void setCanvas(Canvas canvas) {
         Constants.canvas = canvas;
     }
-
+    public static String KEY_MY_CHANNEL="mc";
+    public static String KEY_OTHER_CHANNEL="oc";
 
 }

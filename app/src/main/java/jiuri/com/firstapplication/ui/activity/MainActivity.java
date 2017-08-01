@@ -23,11 +23,14 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import jiuri.com.firstapplication.R;
 import jiuri.com.firstapplication.adapter.DrawGrideAdapter;
 import jiuri.com.firstapplication.bean.MyTextSizeMessage;
+import jiuri.com.firstapplication.ui.fragment.channel.ChannelFragmentDialog;
 import jiuri.com.firstapplication.ui.fragment.main.MainFragment;
 import jiuri.com.firstapplication.ui.fragment.SettingFragment;
 
@@ -117,8 +120,17 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.mainactivity_enter, R.anim.mainactivity_out);
                 break;
             case R.id.main:
-                MainFragment mainFragment = new MainFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, mainFragment).commit();
+                ArrayList<String> arrayList1=new ArrayList<>();
+                ArrayList<String> arrayList2=new ArrayList<>();
+                for (int i = 0; i <12 ; i++) {
+                    arrayList1.add("上面"+i);
+                    arrayList2.add("下面"+i);
+                }
+              /*  MainFragment mainFragment = new MainFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, mainFragment).commit();*/
+                ChannelFragmentDialog instance = ChannelFragmentDialog.instance(arrayList1, arrayList2);
+                instance.show(getFragmentManager(),"haha");
+                //getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, instance).commit();
                 changeState(View.GONE, "", R.color.main);
                 break;
             case R.id.pns:
