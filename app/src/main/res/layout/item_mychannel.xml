@@ -8,11 +8,18 @@
     >
 
     <TextView
+      android:paddingBottom="3dp"
+      android:paddingTop="3dp"
+      android:paddingLeft="3dp"
+      android:paddingRight="15dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@mipmap/channeltype_bg"
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="我的频道"
-        android:textColor="@android:color/black"
+        android:text="我的頻道"
+        android:textColor="@color/titlecolor"
         android:textSize="16sp"
         />
 
@@ -40,7 +47,7 @@
             android:paddingRight="15dp"
             android:paddingTop="5dp"
             android:text="编辑"
-            android:textColor="@android:color/black"
+            android:textColor="@color/titlecolor"
             android:textSize="14sp"
             />
     </FrameLayout>

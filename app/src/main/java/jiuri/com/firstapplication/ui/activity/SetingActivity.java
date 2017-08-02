@@ -14,7 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +25,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import jiuri.com.firstapplication.R;
 import jiuri.com.firstapplication.bean.MyTextSizeMessage;
 
@@ -42,6 +45,12 @@ public class SetingActivity extends AppCompatActivity {
     TextView mTextsize;
     @BindView(R.id.view)
     CardView mView;
+    @BindView(R.id.size_detail)
+    TextView mSizeDetail;
+    @BindView(R.id.push_swich)
+    ImageView mPushSwich;
+    @BindView(R.id.version_detail)
+    RelativeLayout mVersionDetail;
     private Handler mHandler;
     private int textsize;
 
@@ -54,8 +63,8 @@ public class SetingActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         SharedPreferences sp = getSharedPreferences("textsize", MODE_PRIVATE);
         int textsize2 = sp.getInt("textsize", 18);
-        Log.d("TAG", "onCreate: _________"+textsize2);
-        switch (textsize2){
+        Log.d("TAG", "onCreate: _________" + textsize2);
+        switch (textsize2) {
             case 13:
                 mSeekbarSelf.setProgress(0);
                 break;
@@ -77,12 +86,11 @@ public class SetingActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 mView.setVisibility(View.VISIBLE);
-                if (progress<=2){
-                    textsize=13+progress*2;
+                if (progress <= 2) {
+                    textsize = 13 + progress * 2;
                     mTextsize.setTextSize(textsize);
-                }
-                else {
-                    textsize=17+(progress-2)*3;
+                } else {
+                    textsize = 17 + (progress - 2) * 3;
                     mTextsize.setTextSize(textsize);
                 }
             }
@@ -107,7 +115,7 @@ public class SetingActivity extends AppCompatActivity {
                         mView.setVisibility(View.GONE);
 
                     }
-                },3000);
+                }, 3000);
 
             }
         });
@@ -146,5 +154,18 @@ public class SetingActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @OnClick({R.id.push_swich, R.id.version_detail})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.push_swich:
+                mPushSwich.setImageResource(R.mipmap.turn_off);
+                Toast.makeText(this, "推送已关闭", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.version_detail:
+                Intent intent1=new Intent(this,VersionDetailActivity.class);
+                break;
+        }
     }
 }

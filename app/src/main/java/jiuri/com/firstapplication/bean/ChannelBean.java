@@ -31,4 +31,8 @@ public class ChannelBean implements MultiItemEntity {
     public void setBody(String body) {
         this.body = body;
     }
+
+    public void setItmtype(int itmtype) {
+        mItmtype = itmtype;
+    }
 }

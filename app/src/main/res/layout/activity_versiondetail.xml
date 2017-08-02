@@ -1,0 +1,43 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="0dp"
+        android:theme="@style/ToolbarTheme"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="版本声明"
+                android:textColor="@color/titlecolor"
+                android:textSize="25sp"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:text="明報是一份香港報章，1959年創立，發展至今，成了一份讀者以知識份子為主的大報。\n\n
+明報以提供可信的資訊為己任，自1996年以來，多次得到香港中文大學進行的讀者調查評為最具公信力的中文報章。\n\n
+明報新聞App提供香港和兩岸的新聞消息、時評文章；還有旅遊飲食、健康美容等休閒資訊；大家可以一click即得。"
+        android:textSize="18sp" />
+
+</RelativeLayout>

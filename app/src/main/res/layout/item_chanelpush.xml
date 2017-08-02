@@ -4,15 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="5dp"
+    android:padding="8dp"
     >
 
     <TextView
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp"
+        android:paddingLeft="3dp"
+        android:paddingRight="15dp"
+        android:background="@mipmap/channeltype_bg"
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="我的频道"
-        android:textColor="@android:color/black"
+        android:text="推薦頻道"
+        android:textColor="@color/titlecolor"
         android:textSize="16sp"
         />
 
@@ -21,7 +26,7 @@
         android:layout_height="1dp"
         android:layout_weight="1"/>
 
-    <FrameLayout
+<!--    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -44,5 +49,5 @@
             android:textSize="14sp"
 
             />
-    </FrameLayout>
+    </FrameLayout>-->
 </LinearLayout>

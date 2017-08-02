@@ -95,7 +95,8 @@ public class OtherFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         },mRecyclerView);
         mMultipleItemData = getMultipleItemData();
         mRecyclerView.setAdapter(mMyRecycleViewAdapter) ;
-        helper.attachToRecyclerView(mRecyclerView);
+      //  helper.attachToRecyclerView(mRecyclerView);
+
     }
     //为RecycleView绑定触摸事件
     ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.Callback() {

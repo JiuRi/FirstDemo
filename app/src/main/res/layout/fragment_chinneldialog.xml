@@ -4,38 +4,43 @@
     android:id="@+id/activity_channel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/titlecolor"
+    android:background="@drawable/dialogfragment_bg"
     android:orientation="vertical"
    >
 
-    <ImageView
-        android:background="@color/btnbg"
-        android:id="@+id/icon_collapse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginTop="3.0dip"
-        android:padding="10.0dip"
-        android:scaleType="center"
-        android:src="@mipmap/x"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/dialogfragmentheader_bg"
+        android:orientation="horizontal">
 
+        <ImageView
+            android:layout_margin="10dp"
+           android:id="@+id/returnto"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/return_logo"/>
+        <TextView
+            android:gravity="center"
+            android:textColor="@color/titlecolor"
+            android:textSize="@dimen/toolbar_titlesize"
+            android:text="我的頻道"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
 
     <FrameLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp"></android.support.v7.widget.RecyclerView>
+            android:padding="10dp">
+        </android.support.v7.widget.RecyclerView>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_gravity="bottom"
-            android:background="@mipmap/ic_launcher"
-            />
     </FrameLayout>
 </LinearLayout>

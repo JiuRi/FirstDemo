@@ -3,19 +3,25 @@ package jiuri.com.firstapplication.ui.fragment.channel;
 import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.chad.library.adapter.base.BaseViewHolder;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import jiuri.com.firstapplication.R;
 import jiuri.com.firstapplication.app.Constants;
@@ -25,12 +31,15 @@ import jiuri.com.firstapplication.bean.ChannelBean;
  * Created by acer on 2017/8/1.
  */
 
-public class ChannelFragmentDialog extends DialogFragment {
+public class ChannelFragmentDialog extends DialogFragment implements OnChannelListener, OnChannelDragListener {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    Unbinder unbinder;
+    @BindView(R.id.returnto)
+    ImageView mReturnto;
+    Unbinder unbinder1;
     private ArrayList<ChannelBean> mArralist = new ArrayList<>();
     private AdapterChannelFragment mAdapterChannel;
+    private ItemTouchHelper mHelper;
 
     public static ChannelFragmentDialog instance(ArrayList<String> myChanelList, ArrayList<String> otherChanelList) {
         Bundle bundle = new Bundle();
@@ -56,6 +65,7 @@ public class ChannelFragmentDialog extends DialogFragment {
             dialog.getWindow().setWindowAnimations(R.style.dialogSlideAnim);
         }
         View inflate = inflater.inflate(R.layout.fragment_chinneldialog, container, false);
+        unbinder1 = ButterKnife.bind(this, inflate);
         return inflate;
     }
 
@@ -69,8 +79,9 @@ public class ChannelFragmentDialog extends DialogFragment {
     @TargetApi(Build.VERSION_CODES.M)
     private void setData() {
         getAllChannelDate();
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 4);
-        mAdapterChannel = new AdapterChannelFragment(getContext(), mArralist);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 4);
+        mAdapterChannel = new AdapterChannelFragment(getActivity(), mArralist);
+        mAdapterChannel.setOnChannelDragListener(this);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(mAdapterChannel);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
@@ -78,9 +89,14 @@ public class ChannelFragmentDialog extends DialogFragment {
             public int getSpanSize(int position) {
                 int itemViewType = mAdapterChannel.getItemViewType(position);
 
-                return itemViewType==ChannelBean.TYPE_MYCHANNE_ITEM||itemViewType==ChannelBean.TYPE_MYCHANNE_PUSH_ITEM?1:4;
+                return itemViewType == ChannelBean.TYPE_MYCHANNE_ITEM || itemViewType == ChannelBean.TYPE_MYCHANNE_PUSH_ITEM ? 1 : 4;
             }
         });
+
+
+        MyItemTouchHelperCallBack myItemTouchHelperCallBack = new MyItemTouchHelperCallBack(this);
+        mHelper = new ItemTouchHelper(myItemTouchHelperCallBack);
+        mHelper.attachToRecyclerView(recyclerView);
     }
 
     public void getAllChannelDate() {
@@ -98,8 +114,48 @@ public class ChannelFragmentDialog extends DialogFragment {
     }
 
     @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+    }
+
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
+        unbinder1.unbind();
+    }
+
+    @Override
+    public void onItemMove(int starPos, int endPos) {
+        onMove(starPos, endPos);
+    }
+
+    private void onMove(int starPos, int endPos) {
+        ChannelBean startChannel = mArralist.get(starPos);
+        //先删除之前的位置
+        mArralist.remove(starPos);
+        //添加到现在的位置
+        mArralist.add(endPos, startChannel);
+        mAdapterChannel.notifyItemMoved(starPos, endPos);
+    }
+
+    @Override
+    public void onMoveToMyChannel(int starPos, int endPos) {
+        onMove(starPos, endPos);
+    }
+
+    @Override
+    public void onMoveToOtherChannel(int starPos, int endPos) {
+        onMove(starPos, endPos);
+    }
+
+    @Override
+    public void onStarDrag(BaseViewHolder baseViewHolder) {
+        mHelper.startDrag(baseViewHolder);
+    }
+
+    @OnClick(R.id.returnto)
+    public void onViewClicked() {
+        dismiss();
     }
 }

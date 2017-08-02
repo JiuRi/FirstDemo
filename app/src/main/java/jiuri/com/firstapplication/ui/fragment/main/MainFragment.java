@@ -65,6 +65,8 @@ public class MainFragment extends Fragment {
             }
         });
         mRecyclerView.setAdapter(myRecycleViewAdapter) ;
+        mRecyclerView.scrollToPosition(0);
+
     }
     private View toMain() {
         View inflate = View.inflate(getContext(), R.layout.main_headerview, null);

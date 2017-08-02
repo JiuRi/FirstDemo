@@ -23,16 +23,13 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import jiuri.com.firstapplication.R;
 import jiuri.com.firstapplication.adapter.DrawGrideAdapter;
 import jiuri.com.firstapplication.bean.MyTextSizeMessage;
-import jiuri.com.firstapplication.ui.fragment.channel.ChannelFragmentDialog;
-import jiuri.com.firstapplication.ui.fragment.main.MainFragment;
 import jiuri.com.firstapplication.ui.fragment.SettingFragment;
+import jiuri.com.firstapplication.ui.fragment.main.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.pic)
@@ -108,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         mActionBarDrawerToggle.syncState();
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
         mGridView2.setAdapter(new DrawGrideAdapter(2));
-        tiaozhuan(findViewById(R.id.main));
+        tiaozhuan(findViewById(R.id.ins));
     }
 
     public void tiaozhuan(View view) {
@@ -120,17 +117,9 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.mainactivity_enter, R.anim.mainactivity_out);
                 break;
             case R.id.main:
-                ArrayList<String> arrayList1=new ArrayList<>();
-                ArrayList<String> arrayList2=new ArrayList<>();
-                for (int i = 0; i <12 ; i++) {
-                    arrayList1.add("上面"+i);
-                    arrayList2.add("下面"+i);
-                }
-              /*  MainFragment mainFragment = new MainFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, mainFragment).commit();*/
-                ChannelFragmentDialog instance = ChannelFragmentDialog.instance(arrayList1, arrayList2);
-                instance.show(getFragmentManager(),"haha");
-                //getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, instance).commit();
+
+                MainFragment mainFragment = new MainFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, mainFragment).commit();
                 changeState(View.GONE, "", R.color.main);
                 break;
             case R.id.pns:
@@ -151,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.set:
                 mDrawerLayout.closeDrawers();
-                Intent intent1 = new Intent(MainActivity.this, TestActivity.class);
+                Intent intent1 = new Intent(MainActivity.this, SetingActivity.class);
                 startActivity(intent1);
                 overridePendingTransition(R.anim.mainactivity_enter, R.anim.mainactivity_out);
                 break;

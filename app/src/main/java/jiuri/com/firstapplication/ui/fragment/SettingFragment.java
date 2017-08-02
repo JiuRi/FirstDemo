@@ -15,11 +15,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import jiuri.com.firstapplication.R;
+import jiuri.com.firstapplication.ui.fragment.channel.ChannelFragmentDialog;
 
 
 /**
@@ -27,6 +33,9 @@ import jiuri.com.firstapplication.R;
  */
 
 public class SettingFragment extends Fragment {
+    @BindView(R.id.add)
+    TextView mAdd;
+    Unbinder unbinder;
     private String[] pns = {"熱門", "要聞", "港聞", "教育", "社評", "觀點", "中國", "國際", "經濟", "體育", "經濟", "副刊", "娛樂", "英文", "深度報道"};
     private String[] ins = {"熱門", "港聞", "經濟", "地產", "兩岸", "國際", "體育", "娛樂", "文摘"};
     private String[] mArr;
@@ -42,6 +51,7 @@ public class SettingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mSettingFragment = inflater.inflate(R.layout.fragment_cs, container, false);
+        unbinder = ButterKnife.bind(this, mSettingFragment);
         return mSettingFragment;
     }
 
@@ -63,6 +73,24 @@ public class SettingFragment extends Fragment {
 
         setTablayoutColor(to);
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @OnClick(R.id.add)
+    public void onViewClicked() {
+        ArrayList<String> arrayList1=new ArrayList<>();
+        ArrayList<String> arrayList2=new ArrayList<>();
+        for (int i = 0; i <12 ; i++) {
+            arrayList1.add("上面"+i);
+            arrayList2.add("下面"+i);
+        }
+        ChannelFragmentDialog instance = ChannelFragmentDialog.instance(arrayList1, arrayList2);
+        instance.show(getActivity().getFragmentManager(), "CHANNEL");
     }
 
     public static class MyPagerAdapter extends FragmentStatePagerAdapter {
@@ -100,10 +128,11 @@ public class SettingFragment extends Fragment {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void setTablayoutColor(int color) {
-            mMLinearLayou.setBackground(getResources().getDrawable(color));
+        mMLinearLayou.setBackground(getResources().getDrawable(color));
     }
+
     @Override
-    public void onAttach (Context context){
+    public void onAttach(Context context) {
         super.onAttach(context);
     }
 }
