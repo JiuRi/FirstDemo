@@ -32,6 +32,7 @@
                   android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
         />
         <activity android:name=".ui.activity.TestActivity"/>
+        <activity android:name=".ui.activity.VersionDetailActivity"/>
     </application>
 
 </manifest>

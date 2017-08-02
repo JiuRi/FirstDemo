@@ -27,8 +27,8 @@
                 android:layout_centerInParent="true"
                 android:text="設置"
                 android:textColor="@color/titlecolor"
-                android:textSize="25sp"
-                android:textStyle="bold"/>
+                android:textSize="@dimen/toolbar_titlesize"
+               />
         </RelativeLayout>
 
     </android.support.v7.widget.Toolbar>

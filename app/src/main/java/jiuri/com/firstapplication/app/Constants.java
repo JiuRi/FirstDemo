@@ -24,5 +24,6 @@ public class Constants {
     }
     public static String KEY_MY_CHANNEL="mc";
     public static String KEY_OTHER_CHANNEL="oc";
+    public static String KEY_PUSH="swish";
 
 }

@@ -27,6 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import jiuri.com.firstapplication.R;
+import jiuri.com.firstapplication.app.Constants;
 import jiuri.com.firstapplication.bean.MyTextSizeMessage;
 
 
@@ -64,24 +65,15 @@ public class SetingActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("textsize", MODE_PRIVATE);
         int textsize2 = sp.getInt("textsize", 18);
         Log.d("TAG", "onCreate: _________" + textsize2);
-        switch (textsize2) {
-            case 13:
-                mSeekbarSelf.setProgress(0);
-                break;
-            case 15:
-                mSeekbarSelf.setProgress(1);
-                break;
-            case 17:
-                mSeekbarSelf.setProgress(2);
-                break;
-            case 20:
-                mSeekbarSelf.setProgress(3);
-                break;
-            case 23:
-                mSeekbarSelf.setProgress(4);
-                break;
+        setTextInfo(textsize2);
+        SharedPreferences switch_info = getSharedPreferences("switch_info", MODE_PRIVATE);
+        boolean aBoolean = switch_info.getBoolean(Constants.KEY_PUSH, true);
+        if (aBoolean){
+            mPushSwich.setImageResource(R.mipmap.turn_on);
         }
-
+        else {
+            mPushSwich.setImageResource(R.mipmap.turn_off);
+        }
         mSeekbarSelf.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -89,9 +81,11 @@ public class SetingActivity extends AppCompatActivity {
                 if (progress <= 2) {
                     textsize = 13 + progress * 2;
                     mTextsize.setTextSize(textsize);
+                    setTextInfo(textsize);
                 } else {
                     textsize = 17 + (progress - 2) * 3;
                     mTextsize.setTextSize(textsize);
+                    setTextInfo(textsize);
                 }
             }
 
@@ -104,6 +98,7 @@ public class SetingActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 SharedPreferences sp = getSharedPreferences("textsize", MODE_PRIVATE);
                 SharedPreferences.Editor edit = sp.edit();
+
                 edit.putInt("textsize", textsize);
                 edit.commit();
                 MyTextSizeMessage myTextSizeMessage = new MyTextSizeMessage();
@@ -137,6 +132,31 @@ public class SetingActivity extends AppCompatActivity {
         });
     }
 
+    private void setTextInfo(int textsize2) {
+        switch (textsize2) {
+            case 13:
+                mSeekbarSelf.setProgress(0);
+                mSizeDetail.setText("最小");
+                break;
+            case 15:
+                mSeekbarSelf.setProgress(1);
+                mSizeDetail.setText("较小");
+                break;
+            case 17:
+                mSeekbarSelf.setProgress(2);
+                mSizeDetail.setText("中等");
+                break;
+            case 20:
+                mSeekbarSelf.setProgress(3);
+                mSizeDetail.setText("较大");
+                break;
+            case 23:
+                mSeekbarSelf.setProgress(4);
+                mSizeDetail.setText("最大");
+                break;
+        }
+    }
+
     private String getResourcesUri(@DrawableRes int id) {
         Resources resources = getResources();
         String uriPath = ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
@@ -160,11 +180,28 @@ public class SetingActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.push_swich:
-                mPushSwich.setImageResource(R.mipmap.turn_off);
-                Toast.makeText(this, "推送已关闭", Toast.LENGTH_SHORT).show();
+                SharedPreferences switch_info = getSharedPreferences("switch_info", MODE_PRIVATE);
+                boolean aBoolean = switch_info.getBoolean(Constants.KEY_PUSH, true);
+                if (aBoolean){
+                    Toast.makeText(this, "推送已关闭", Toast.LENGTH_SHORT).show();
+                    SharedPreferences.Editor edit = switch_info.edit();
+                    edit.putBoolean(Constants.KEY_PUSH,false);
+                    edit.commit();
+                    mPushSwich.setImageResource(R.mipmap.turn_off);
+                }
+                else {
+                    Toast.makeText(this, "推送已开启", Toast.LENGTH_SHORT).show();
+                    SharedPreferences.Editor edit = switch_info.edit();
+                    edit.putBoolean(Constants.KEY_PUSH,true);
+                    edit.commit();
+                    mPushSwich.setImageResource(R.mipmap.turn_on);
+                }
+
+
                 break;
             case R.id.version_detail:
-                Intent intent1=new Intent(this,VersionDetailActivity.class);
+                Intent intent1=new Intent(SetingActivity.this,VersionDetailActivity.class);
+                startActivity(intent1);
                 break;
         }
     }
