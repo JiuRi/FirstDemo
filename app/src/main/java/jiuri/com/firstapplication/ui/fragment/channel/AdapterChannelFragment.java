@@ -90,7 +90,7 @@ public class AdapterChannelFragment extends BaseMultiItemQuickAdapter<ChannelBea
                                     break;
                                 case MotionEvent.ACTION_MOVE:
                                     long end = System.currentTimeMillis();
-                                    if (end- mStart >100){
+                                    if (end- mStart >1000){
                                         if (onChannelDragListener!=null) {
                                             onChannelDragListener.onStarDrag(baseViewHolder);
                                         }
@@ -104,7 +104,7 @@ public class AdapterChannelFragment extends BaseMultiItemQuickAdapter<ChannelBea
                             return false;
                         }
                     }).getView(R.id.ivDelete).setTag(true);//在我的频道里面设置true标示，之后会根据这个标示来判断编辑模式是否显示;
-                    baseViewHolder.setText(R.id.tvChannel,item.getBody()).setOnClickListener(R.id.ivDelete, new View.OnClickListener() {
+                    baseViewHolder.setText(R.id.tvChannel,item.getBody()).setImageResource(R.id.tvIcon,item.getIcon()).setOnClickListener(R.id.ivDelete, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             if (isEdit) {
@@ -122,10 +122,12 @@ public class AdapterChannelFragment extends BaseMultiItemQuickAdapter<ChannelBea
                                     int spanCount = ((GridLayoutManager) manager).getSpanCount();
                                     int targetX = targetView.getLeft();
                                     int targetY = targetView.getTop();
-                                    int myChannelSize = getMyChannelSize();
+                                   // int myChannelSize = getMyChannelSize();
+                                    int myChannelSize=(baseViewHolder.getPosition());
                                     if (myChannelSize % spanCount == 1) {
                                         //我的频道最后一行 之后一个，移动后
                                         targetY -= targetView.getHeight();
+
                                     }
                                     item.setItmtype(ChannelBean.TYPE_MYCHANNE_PUSH_ITEM);//改为推荐频道类型
 
@@ -150,8 +152,8 @@ public class AdapterChannelFragment extends BaseMultiItemQuickAdapter<ChannelBea
                     break;
                 case ChannelBean.TYPE_MYCHANNE_PUSH_ITEM :
                     //频道推荐列表
-                    baseViewHolder.setText(R.id.tvChannel, item.getBody())
-                            .setOnClickListener(R.id.tvChannel, new View.OnClickListener() {
+                    baseViewHolder.setText(R.id.tvChannel, item.getBody()).setImageResource(R.id.tvIcon,item.getIcon())
+                            .setOnClickListener(R.id.push_view, new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     int myLastPosition = getMyLastPosition();
@@ -165,17 +167,18 @@ public class AdapterChannelFragment extends BaseMultiItemQuickAdapter<ChannelBea
                                     if (mRecyclerView.indexOfChild(targetView) >= 0 && myLastPosition != -1) {
                                         RecyclerView.LayoutManager manager = mRecyclerView.getLayoutManager();
                                         int spanCount = ((GridLayoutManager) manager).getSpanCount();
-                                        int targetX = targetView.getLeft() + targetView.getWidth();
+                                        int targetX = targetView.getLeft()+targetView.getWidth();
                                         int targetY = targetView.getTop();
 
-                                        int myChannelSize = getMyChannelSize();//这里我是为了偷懒 ，算出来我的频道的大小
+                                       // int myChannelSize = getMyChannelSize();//这里我是为了偷懒 ，算出来我的频道的大小
+                                        int myChannelSize=getMyLastPosition();
                                         if (myChannelSize % spanCount == 0) {
                                             //添加到我的频道后会换行，所以找到倒数第4个的位置
 
                                             View lastFourthView = mRecyclerView.getLayoutManager().findViewByPosition(getMyLastPosition() - 3);
 //                                        View lastFourthView = mRecyclerView.getChildAt(getMyLastPosition() - 3);
                                             targetX = lastFourthView.getLeft();
-                                            targetY = lastFourthView.getTop() + lastFourthView.getHeight();
+                                            targetY = lastFourthView.getTop() + targetView.getHeight();
                                         }
 
 
@@ -205,7 +208,7 @@ public class AdapterChannelFragment extends BaseMultiItemQuickAdapter<ChannelBea
     }
 
     private int getMyLastPosition() {
-        for (int i = mData.size() - 1; i > -1; i--) {
+        for (int i = mChannelBeanArrayList.size() - 1; i > -1; i--) {
             ChannelBean channel = (ChannelBean) mChannelBeanArrayList.get(i);
             if (ChannelBean.TYPE_MYCHANNE_ITEM == channel.getItemType()) {
                 //找到第一个直接返回
@@ -229,7 +232,7 @@ public class AdapterChannelFragment extends BaseMultiItemQuickAdapter<ChannelBea
         return translateAnimation;
     }
 
-    private int ANIM_TIME = 360;
+    private int ANIM_TIME = 300;
 
     private void startAnimation(final View currentView, int targetX, int targetY) {
         final ViewGroup parent = (ViewGroup) mRecyclerView.getParent();
@@ -292,7 +295,7 @@ public class AdapterChannelFragment extends BaseMultiItemQuickAdapter<ChannelBea
         int size = 0;
         for (int i = 0; i < mChannelBeanArrayList.size(); i++) {
             ChannelBean channel = (ChannelBean) mChannelBeanArrayList.get(i);
-            if (channel.getItemType() == ChannelBean.TYPE_MYCHANNE) {
+            if (channel.getItemType() == ChannelBean.TYPE_MYCHANNE_ITEM) {
                 size++;
             }
         }

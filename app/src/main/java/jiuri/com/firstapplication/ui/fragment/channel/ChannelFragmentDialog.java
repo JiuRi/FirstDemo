@@ -37,6 +37,9 @@ public class ChannelFragmentDialog extends DialogFragment implements OnChannelLi
     @BindView(R.id.returnto)
     ImageView mReturnto;
     Unbinder unbinder1;
+    private int [] arr1={R.mipmap.rm_pns,R.mipmap.yw_pns,R.mipmap.gw_pns,R.mipmap.jy_pns,R.mipmap.sp_pns,R.mipmap.gd_pns,R.mipmap.zg_pns,R.mipmap.gj_pns,R.mipmap.jj_pns,R.mipmap.ty_pns};
+    private int [] arr2={R.mipmap.fk_pns,R.mipmap.yl_pns,R.mipmap.yy_pns,R.mipmap.sdbd_pns};
+    //"熱門", "要聞", "港聞", "教育", "社評", "觀點", "中國", "國際", "經濟", "體育", "經濟", "副刊", "娛樂", "英文", "深度報道"
     private ArrayList<ChannelBean> mArralist = new ArrayList<>();
     private AdapterChannelFragment mAdapterChannel;
     private ItemTouchHelper mHelper;
@@ -103,13 +106,13 @@ public class ChannelFragmentDialog extends DialogFragment implements OnChannelLi
         Bundle arguments = getArguments();
         ArrayList myChannel = (ArrayList) arguments.getSerializable(Constants.KEY_MY_CHANNEL);
         ArrayList otherChannel = (ArrayList) arguments.getSerializable(Constants.KEY_OTHER_CHANNEL);
-        mArralist.add(new ChannelBean(ChannelBean.TYPE_MYCHANNE, "我的频道"));
+        mArralist.add(new ChannelBean(ChannelBean.TYPE_MYCHANNE, "我的频道",0));
         for (int i = 0; i < myChannel.size(); i++) {
-            mArralist.add(new ChannelBean(ChannelBean.TYPE_MYCHANNE_ITEM, (String) myChannel.get(i)));
+            mArralist.add(new ChannelBean(ChannelBean.TYPE_MYCHANNE_ITEM, (String) myChannel.get(i),arr1[i]));
         }
-        mArralist.add(new ChannelBean(ChannelBean.TYPE_MYCHANNE_PUSH, "推荐频道"));
+        mArralist.add(new ChannelBean(ChannelBean.TYPE_MYCHANNE_PUSH, "推荐频道",0));
         for (int i = 0; i < otherChannel.size(); i++) {
-            mArralist.add(new ChannelBean(ChannelBean.TYPE_MYCHANNE_PUSH_ITEM, (String) otherChannel.get(i)));
+            mArralist.add(new ChannelBean(ChannelBean.TYPE_MYCHANNE_PUSH_ITEM, (String) otherChannel.get(i),arr2[i]));
         }
     }
 

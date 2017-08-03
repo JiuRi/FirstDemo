@@ -36,7 +36,9 @@ public class SettingFragment extends Fragment {
     @BindView(R.id.add)
     TextView mAdd;
     Unbinder unbinder;
-    private String[] pns = {"熱門", "要聞", "港聞", "教育", "社評", "觀點", "中國", "國際", "經濟", "體育", "經濟", "副刊", "娛樂", "英文", "深度報道"};
+    private String[] pns = {"熱門", "要聞", "港聞", "教育", "社評", "觀點", "中國", "國際", "經濟", "體育", "副刊", "娛樂", "英文", "深度報道"};
+    private String[] pns1 = {"熱門", "要聞", "港聞", "教育", "社評", "觀點", "中國", "國際", "經濟", "體育"};
+    private String[] pns2 = {"副刊", "娛樂", "英文", "深度報道"};
     private String[] ins = {"熱門", "港聞", "經濟", "地產", "兩岸", "國際", "體育", "娛樂", "文摘"};
     private String[] mArr;
     private RecyclerView list;
@@ -85,9 +87,11 @@ public class SettingFragment extends Fragment {
     public void onViewClicked() {
         ArrayList<String> arrayList1=new ArrayList<>();
         ArrayList<String> arrayList2=new ArrayList<>();
-        for (int i = 0; i <12 ; i++) {
-            arrayList1.add("上面"+i);
-            arrayList2.add("下面"+i);
+        for (int i = 0; i < pns1.length; i++) {
+            arrayList1.add(pns1[i]);
+        }
+        for (int i = 0; i < pns2.length; i++) {
+            arrayList2.add(pns2[i]);
         }
         ChannelFragmentDialog instance = ChannelFragmentDialog.instance(arrayList1, arrayList2);
         instance.show(getActivity().getFragmentManager(), "CHANNEL");

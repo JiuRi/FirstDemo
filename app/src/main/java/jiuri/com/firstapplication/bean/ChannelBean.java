@@ -13,10 +13,20 @@ public class ChannelBean implements MultiItemEntity {
     public static final  int TYPE_MYCHANNE_PUSH_ITEM=4;
     private int mItmtype;
     private String body;
+    private int icon;
 
-    public ChannelBean(int mItmtype, String body) {
+    public int getIcon() {
+        return icon;
+    }
+
+    public void setIcon(int icon) {
+        this.icon = icon;
+    }
+
+    public ChannelBean(int mItmtype, String body,int icon) {
         this.mItmtype = mItmtype;
         this.body = body;
+        this.icon=icon;
     }
 
     @Override
