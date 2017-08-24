@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
         mGridView2.setAdapter(new DrawGrideAdapter(2));
         tiaozhuan(findViewById(R.id.ins));
+        mCrazyBanner.setSID("4058322222485");
     }
 
     public void tiaozhuan(View view) {

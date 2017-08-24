@@ -41,6 +41,8 @@
     </LinearLayout>
 </HorizontalScrollView>
     <TextView
+        android:background="@android:color/white"
+        android:id="@+id/body"
         android:textSize="16sp"
         android:layout_margin="5dp"
         android:lineSpacingExtra="10dp"

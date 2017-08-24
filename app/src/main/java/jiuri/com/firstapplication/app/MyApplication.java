@@ -1,15 +1,16 @@
 package jiuri.com.firstapplication.app;
 
-import android.app.Application;
+import com.mob.MobApplication;
 
 /**
  * Created by user103 on 2017/7/14.
  */
 
-public class MyApplication extends Application {
+public class MyApplication extends MobApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
         //这个回调可用于检测应用内所有activity的生命周期!
       /*  registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
