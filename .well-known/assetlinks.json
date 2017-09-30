@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.mingpao.applink",
+    "sha256_cert_fingerprints":
+    ["34:83:32:70:92:75:D4:94:76:FD:65:C2:CB:34:72:05:56:0F:F1:1A:6F:1B:83:F1:16:44:0F:2E:66:F9:46:53"]
+  }
+}]
